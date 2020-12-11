@@ -1,49 +1,12 @@
-.header {
-  min-height: 10vh;
-  display: grid;
-  place-items: center;
-}
-
-.container {
-  min-height: 80vh;
-  margin: 0 auto;
-  width: 80%;
-}
-
-.card {
-  padding: 10px;
-  border-radius: 5px;
-  box-shadow: 0px 10px 10px #cccccc;
-  border: 1px solid #ddcccc;
-}
-
-.input-area {
-  padding: 10px;
-  display: grid;
-  place-items: center;
-}
-
-.input-area label {
-  font-weight: 800;
-  margin-bottom: 10px;
-}
-
-.input-area input {
-  padding: 5px 0px;
-}
-
-.input-area button {
-  display: inline-block;
-  padding: 5px 20px;
-  background-color: #39577a;
-  color: #ffffff;
-  border-radius: 5px;
-  border: 0;
-  margin-top: 5px;
+.weather-icon {
+  width: 100px;
 }
 
 .footer {
-  min-height: 10vh;
-  display: grid;
-  place-items: center;
+  background: #fff;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+  right: 0;
 }

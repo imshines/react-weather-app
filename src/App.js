@@ -8,8 +8,8 @@ countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
 function App() {
   // State
   const [apiData, setApiData] = useState({});
-  const [getState, setGetState] = useState('salem');
-  const [state, setState] = useState('salem');
+  const [getState, setGetState] = useState('tamilnadu');
+  const [state, setState] = useState('tamilnadu');
 
   // API KEY AND URL
   const apiKey = process.env.REACT_APP_API_KEY;
@@ -22,10 +22,10 @@ function App() {
   }, [apiUrl]);
 
   const inputHandler = (event) => {
-    setGetState(event.target.value);
+    setGetState(event.target.value.trim());
   };
 
-  const submitHandler = (event) => {
+  const submitHandler = () => {
     setState(getState);
   };
 
@@ -35,45 +35,78 @@ function App() {
 
   return (
     <div className="App">
-      <header className="header">
-        <h1>React Weather App</h1>
+      <header className="d-flex justify-content-center align-items-center">
+        <h2>React Weather App</h2>
       </header>
       <div className="container">
-        <div className="card">
-          <div className="input-area">
-            <label htmlFor="locationName">Enter Your Location : </label>
+        <div className="mt-3 d-flex flex-column justify-content-center align-items-center">
+          <div class="col-auto">
+            <label for="location-name" class="col-form-label">
+              Enter Location :
+            </label>
+          </div>
+          <div class="col-auto">
             <input
               type="text"
-              name="locationName"
-              value={getState}
+              id="location-name"
+              class="form-control"
               onChange={inputHandler}
-            />{' '}
-            <button type="submit" onClick={submitHandler}>
-              Search
-            </button>
+              value={getState}
+            />
           </div>
+          <button className="btn btn-primary mt-2" onClick={submitHandler}>
+            Search
+          </button>
+        </div>
+
+        <div className="card mt-3 mx-auto" style={{ width: '60vw' }}>
           {apiData.main ? (
-            <div className="weather-status">
-              <p>Type - {apiData.weather[0].main}</p>
-              <p>Temp - {kelvinToFarenheit(apiData.main.temp)}&deg; C</p>
-              <p>
-                Min Temp - {kelvinToFarenheit(apiData.main.temp_min)}&deg; C
-              </p>
-              <p>
-                Max Temp - {kelvinToFarenheit(apiData.main.temp_max)}&deg; C
-              </p>
-              <p>Place - {apiData.name}</p>
-              <p>
-                Country -{' '}
-                {countries.getName(apiData.sys.country, 'en', {
-                  select: 'official',
-                })}
-              </p>
-              <p>Time - {Date(apiData.sys.country)}</p>
+            <div class="card-body text-center">
               <img
                 src={`http://openweathermap.org/img/w/${apiData.weather[0].icon}.png`}
-                alt=""
+                alt="weather status icon"
+                className="weather-icon"
               />
+
+              <p className="h2">
+                {kelvinToFarenheit(apiData.main.temp)}&deg; C
+              </p>
+
+              <p className="h5">
+                <i className="fas fa-map-marker-alt"></i>{' '}
+                <strong>{apiData.name}</strong>
+              </p>
+
+              <div className="row mt-4">
+                <div className="col-md-6">
+                  <p>
+                    <i class="fas fa-temperature-low "></i>{' '}
+                    <strong>
+                      {kelvinToFarenheit(apiData.main.temp_min)}&deg; C
+                    </strong>
+                  </p>
+                  <p>
+                    <i className="fas fa-temperature-high"></i>{' '}
+                    <strong>
+                      {kelvinToFarenheit(apiData.main.temp_max)}&deg; C
+                    </strong>
+                  </p>
+                </div>
+                <div className="col-md-6">
+                  <p>
+                    {' '}
+                    <strong>{apiData.weather[0].main}</strong>
+                  </p>
+                  <p>
+                    <strong>
+                      {' '}
+                      {countries.getName(apiData.sys.country, 'en', {
+                        select: 'official',
+                      })}
+                    </strong>
+                  </p>
+                </div>
+              </div>
             </div>
           ) : (
             <h1>Loading</h1>
@@ -82,7 +115,11 @@ function App() {
       </div>
       <footer className="footer">
         <code>
-          Created by <span>imshines</span> using React
+          Created by{' '}
+          <a href="https://github.com/imshines" target="none">
+            imshines
+          </a>{' '}
+          using React
         </code>
       </footer>
     </div>
