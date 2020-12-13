@@ -23,7 +23,7 @@ function App() {
   }, [apiUrl]);
 
   const inputHandler = (event) => {
-    setGetState(event.target.value());
+    setGetState(event.target.value);
   };
 
   const submitHandler = () => {
