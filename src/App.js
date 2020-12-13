@@ -15,6 +15,7 @@ function App() {
   const apiKey = process.env.REACT_APP_API_KEY;
   const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${state}&appid=${apiKey}`;
 
+  // Side effect
   useEffect(() => {
     fetch(apiUrl)
       .then((res) => res.json())
@@ -22,7 +23,7 @@ function App() {
   }, [apiUrl]);
 
   const inputHandler = (event) => {
-    setGetState(event.target.value.trim());
+    setGetState(event.target.value());
   };
 
   const submitHandler = () => {
